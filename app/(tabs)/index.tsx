@@ -1,70 +1,77 @@
-import { Image, StyleSheet, Platform } from 'react-native';
+// app/(tabs)/index.tsx
+import React from "react";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
-import { HelloWave } from '@/components/HelloWave';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
+import Categories from "./categories";
+import { View, Text, StyleSheet } from "react-native";
+import Icon from "react-native-vector-icons/Ionicons";
 
-export default function HomeScreen() {
+const Tab = createBottomTabNavigator();
+
+export default function TabNavigator() {
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({ ios: 'cmd + d', android: 'cmd + m' })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-        <ThemedText>
-          Tap the Explore tab to learn more about what's included in this starter app.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          When you're ready, run{' '}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+    <Tab.Navigator
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ focused, color, size }) => {
+          let iconName;
+
+          switch (route.name) {
+            case "Chat":
+              iconName = focused ? "chatbubble" : "chatbubble-outline";
+              break;
+            case "Call":
+              iconName = focused ? "call" : "call-outline";
+              break;
+            case "Scan":
+              iconName = focused ? "qr-code" : "qr-code-outline";
+              break;
+            case "Wishlist":
+              iconName = focused ? "heart" : "heart-outline";
+              break;
+            case "VIP":
+              iconName = focused ? "star" : "star-outline";
+              break;
+            default:
+              iconName = "ellipse";
+              break;
+          }
+
+          return (
+            <View style={styles.tabIcon}>
+              <Icon name={iconName} size={size} color={color} />
+              <Text
+                style={[styles.tabText, { color: focused ? "#FF5733" : color }]}
+              >
+                {route.name}
+              </Text>
+            </View>
+          );
+        },
+        tabBarShowLabel: false,
+        tabBarActiveTintColor: "#FF5733",
+        tabBarInactiveTintColor: "gray",
+        tabBarStyle: {
+          height: 70,
+          paddingBottom: 10,
+        },
+        headerShown: false,
+      })}
+    >
+      <Tab.Screen name="Chat" component={Categories} />
+      <Tab.Screen name="Call" component={Categories} />
+      <Tab.Screen name="Scan" component={Categories} />
+      <Tab.Screen name="Wishlist" component={Categories} />
+      <Tab.Screen name="VIP" component={Categories} />
+    </Tab.Navigator>
   );
 }
 
 const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
+  tabIcon: {
+    justifyContent: "center",
+    alignItems: "center",
   },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
-  },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
+  tabText: {
+    fontSize: 12,
   },
 });

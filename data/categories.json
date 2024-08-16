@@ -1,0 +1,30 @@
+[
+    {
+      "id": 1,
+      "Worker_Role": "Astrologer",
+      "icon": "https://cdn.pixabay.com/photo/2023/01/28/16/55/woman-7751363_1280.jpg"
+    },
+    {
+      "id": 2,
+      "Worker_Role": "Assistant",
+      "icon": "https://cdn.pixabay.com/photo/2018/08/17/15/29/call-3613071_640.png"
+    },
+    {
+      "id": 3,
+      "Worker_Role": "Makeup",
+      "icon": "https://cdn.pixabay.com/photo/2019/11/22/18/21/cosmetics-4645407_1280.jpg"
+    },
+    {
+      "id": 4,
+      "Worker_Role": "Mehndi",
+      "icon": "https://cdn.pixabay.com/photo/2016/05/20/07/33/wedding-1404620_640.jpg"
+    },
+    {
+      "id": 5,
+      "Worker_Role": "Photographer",
+      "icon": "https://th.bing.com/th?id=OIP.yyNmzQIoPY519auR-e1AfgAAAA&w=306&h=204&c=8&rs=1&qlt=90&o=6&dpr=1.3&pid=3.1&rm=2"
+    }
+  
+
+  ]
+  
